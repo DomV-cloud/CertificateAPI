@@ -13,6 +13,7 @@ namespace CertificateAPI.Controllers
     [ApiController]
     [ApiVersion("1.0")]
     [Route("api/v1/[controller]")]
+    [ApiKey]
     public class CsrCertificateController : Controller
     {
         private readonly ICsrService _csrService;
@@ -37,7 +38,6 @@ namespace CertificateAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [ApiKey]
         public async Task<IActionResult> CreateCsrCertificate([FromBody] CsrCertificateRequest csrCertificateRequest)
         {
             await _logger.LogInformationAsync("Incoming request to create CSR certificate with FriendlyName: {0}", csrCertificateRequest.FriendlyName);
